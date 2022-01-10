@@ -10,7 +10,7 @@
                 "packagelists/selinux-full.json"
             ],
             "KernelCommandLine": {
-                "SELinux": "permissive"
+                "SELinux": "enforcing"
             },
             "KernelOptions": {
                 "default": "kernel"
@@ -24,7 +24,7 @@
                 "packagelists/selinux.json"
             ],
             "KernelCommandLine": {
-                "SELinux": "permissive"
+                "SELinux": "enforcing"
             },
             "KernelOptions": {
                 "default": "kernel"

@@ -54,7 +54,7 @@
             },
             "KernelCommandLine": {
                 "ExtraCommandLine": "fips=1",
-                "SELinux": "permissive"
+                "SELinux": "enforcing"
             },
             "Hostname": "cbl-mariner"
         }

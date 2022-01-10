@@ -53,7 +53,7 @@
                 "default": "kernel"
             },
             "KernelCommandLine": {
-                "SELinux": "permissive"
+                "SELinux": "enforcing"
             },
             "Users": [
                 {
