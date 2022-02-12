@@ -17,7 +17,7 @@ Source4:        tdnfrepogpgcheck.conf
 Patch0:         tdnf-mandatory-space-list-output.patch
 Patch1:         tdnf-default-mariner-release.patch
 Patch2:         tdnf-enable-plugins-by-default.patch
-Patch3:         tdnf-add-download-command.patch
+#Patch3:         tdnf-add-download-command.patch
 
 #Cmake requires binutils
 BuildRequires:  binutils
