@@ -267,20 +267,22 @@ func (r *RpmRepoCloner) Clone(cloneDeps bool, packagesToClone ...*pkgjson.Packag
 	for _, pkg := range packagesToClone {
 		pkgName := convertPackageVersionToTdnfArg(pkg)
 
-		logger.Log.Debugf("Cloning: %s", pkgName)
+		logger.Log.Warnf("Cloning: %s Deps: %t", pkgName, cloneDeps)
 		args := []string{
-			"--destdir",
+			"--downloaddir",
 			chrootDownloadDir,
 			pkgName,
 		}
 
 		// special case to skip dependencies for msopenjdk-11
-		if strings.HasPrefix(pkgName, "msopenjdk-") {
-			args = append([]string{"download-nodeps"}, args...)
-		} else if cloneDeps {
-			args = append([]string{"download", "--alldeps"}, args...)
+		//if strings.HasPrefix(pkgName, "msopenjdk-") {
+		//	args = append([]string{"install", "-y", "--downloadonly"}, args...)
+		//} else 
+		if cloneDeps {
+			args = append([]string{"install", "-y", "--downloadonly"}, args...)
 		} else {
-			args = append([]string{"download-nodeps"}, args...)
+			//args = append([]string{"download-nodeps"}, args...)
+			logger.Log.Panicf("Not Supported")
 		}
 
 		err = r.chroot.Run(func() (err error) {
@@ -482,8 +484,8 @@ func (r *RpmRepoCloner) clonePackage(baseArgs []string, enabledRepoOrder ...stri
 		)
 		stdout, stderr, err = shell.Execute("tdnf", args...)
 
-		logger.Log.Debugf("stdout: %s", stdout)
-		logger.Log.Debugf("stderr: %s", stderr)
+		logger.Log.Warnf("stdout: %s", stdout)
+		logger.Log.Warnf("stderr: %s", stderr)
 
 		if err != nil {
 			logger.Log.Debugf("tdnf error (will continue if the only errors are toybox conflicts):\n '%s'", stderr)
