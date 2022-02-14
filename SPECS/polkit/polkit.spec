@@ -1,7 +1,7 @@
 Summary:           A toolkit for defining and handling authorizations.
 Name:              polkit
 Version:           0.119
-Release:           2%{?dist}
+Release:           3%{?dist}
 Group:             Applications/System
 Vendor:            Microsoft Corporation
 License:           GPLv2+
@@ -17,6 +17,9 @@ BuildRequires:     intltool >= 0.40.0
 BuildRequires:     mozjs-devel >= 78.3.1
 BuildRequires:     pam-devel
 BuildRequires:     systemd-devel
+BuildRequires:     perl
+BuildRequires:     perl-generators
+BuildRequires:     perl(File::Find)
 Requires:          mozjs
 Requires:          expat
 Requires:          glib
@@ -110,6 +113,9 @@ fi
 %{_libdir}/pkgconfig/*.pc
 
 %changelog
+*   Sun Feb 13 2022 Jon Slobodzian <joslobo@microsoft.com> - 0.119-3
+-   Add BR for perl and perl-generators
+
 *   Mon Feb 07 2022 Neha Agarwal <nehaagarwal@microsoft.com> - 0.119-2
 -   Patch for CVE-2021-4034.
 
