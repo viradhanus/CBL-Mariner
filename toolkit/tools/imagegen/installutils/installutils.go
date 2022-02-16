@@ -570,8 +570,12 @@ func initializeTdnfConfiguration(installRoot string) (err error) {
 	)
 
 	logger.Log.Debugf("Downloading '%s' package to a clean RPM root under '%s'.", releasePackage, installRoot)
+	stdout, _, _ := shell.Execute("tdnf", "list")
+	logger.Log.Warnf(stdout)
+	stdout, _, _ = shell.Execute("tdnf", "repolist")
+	logger.Log.Warnf(stdout)
 
-	err = shell.ExecuteLive(squashErrors, "tdnf", "-v", "install", "-y", "--downloadonly", "--downloaddir", installRoot, releasePackage)
+	err = shell.ExecuteLive(squashErrors, "tdnf", "install", "-y", "--downloadonly", "--downloaddir", installRoot, releasePackage)
 	//err = shell.ExecuteLive(squashErrors, "tdnf", "download", "--alldeps", "--destdir", installRoot, releasePackage)
 	if err != nil {
 		logger.Log.Errorf("Failed to prepare the RPM database on downloading the 'mariner-release' package: %v", err)
@@ -581,7 +585,7 @@ func initializeTdnfConfiguration(installRoot string) (err error) {
 	rpmSearch := filepath.Join(installRoot, "*.rpm")
 	rpmFiles, err := filepath.Glob(rpmSearch)
 	if err != nil {
-		logger.Log.Errorf("Failed to prepare the RPM database while searching for RPM files: %v", err)
+		logger.Log.Warnf("Failed to prepare the RPM database while searching for RPM files: %v", err)
 		return
 	}
 
@@ -596,7 +600,7 @@ func initializeTdnfConfiguration(installRoot string) (err error) {
 		}
 	}()
 
-	logger.Log.Debugf("Installing 'mariner-release' package to a clean RPM root under '%s'.", installRoot)
+	logger.Log.Warnf("Installing 'mariner-release' package to a clean RPM root under '%s'.", installRoot)
 
 	rpmArgs := []string{"-i", "--root", installRoot}
 	rpmArgs = append(rpmArgs, rpmFiles...)

@@ -1,0 +1,51 @@
+diff --git a/client/packageutils.c b/client/packageutils.c
+index e130d66..625e1d6 100644
+--- a/client/packageutils.c
++++ b/client/packageutils.c
+@@ -686,7 +686,8 @@ uint32_t
+ TDNFAddPackagesForInstall(
+     PSolvSack pSack,
+     Queue* pQueueGoal,
+-    const char* pszPkgName
++    const char* pszPkgName,
++    bool isDownloadOnly
+     )
+ {
+     uint32_t dwError = 0;
+@@ -711,7 +712,7 @@ TDNFAddPackagesForInstall(
+                   &dwInstallPackage);
+     BAIL_ON_TDNF_ERROR(dwError);
+ 
+-    if(dwInstallPackage == 1)
++    if((dwInstallPackage == 1) || (isDownloadOnly))
+     {
+         queue_push(pQueueGoal, dwHighestAvailable);
+     }
+diff --git a/client/prototypes.h b/client/prototypes.h
+index ba1b07a..2ff032b 100644
+--- a/client/prototypes.h
++++ b/client/prototypes.h
+@@ -381,7 +381,8 @@ uint32_t
+ TDNFAddPackagesForInstall(
+     PSolvSack pSack,
+     Queue* pQueueGoal,
+-    const char* pszPkgName
++    const char* pszPkgName,
++    bool isDownloadOnly
+     );
+ 
+ uint32_t
+diff --git a/client/resolve.c b/client/resolve.c
+index b9164e8..73a482c 100644
+--- a/client/resolve.c
++++ b/client/resolve.c
+@@ -383,7 +383,8 @@ TDNFPrepareSinglePkg(
+         dwError = TDNFAddPackagesForInstall(
+                       pSack,
+                       queueGoal,
+-                      pszPkgName);
++                      pszPkgName,
++                      pTdnf->pArgs->nDownloadOnly!=0);
+         BAIL_ON_TDNF_ERROR(dwError);
+     }
+     else if (nAlterType == ALTER_UPGRADE)
