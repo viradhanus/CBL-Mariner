@@ -2835,7 +2835,6 @@
                 "keepalived",
                 "kernel",
                 "kernel-headers",
-                "kernel-hyperv",
                 "kernel-rt",
                 "keyutils",
                 "kmod",
