@@ -1,7 +1,9 @@
 {
     "packages": [
         "selinux-policy",
+        "selinux-policy-modules",
         "selinux-policy-devel",
+        "policycoreutils",
         "policycoreutils-python-utils",
         "checkpolicy",
         "secilc",
