@@ -1,7 +1,7 @@
 Summary:        SELinux library and simple utilities
 Name:           libselinux
 Version:        3.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        Public Domain
 Vendor:         Microsoft Corporation
 Distribution:   Mariner
@@ -33,9 +33,19 @@ decisions.  Required for any applications that use the SELinux API.
 Summary:        SELinux libselinux utilies
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
+Requires:       %{name}-utils-min = %{version}-%{release}
 
 %description    utils
 The libselinux-utils package contains the utilities
+
+%package        utils-min
+Summary:        Minimum libselinux-utilities
+Group:          Development/Libraries
+Requires:       %{name} = %{version}-%{release}
+
+%description    utils-min
+This package contains the sefcontext_compile and selinuxenabled
+utilities.
 
 %package        devel
 Summary:        Header files and libraries used to build SELinux
@@ -87,10 +97,17 @@ echo "d %{_localstatedir}/run/setrans 0755 root root" > %{buildroot}/%{_libdir}/
 %files utils
 %defattr(-,root,root,-)
 %{_sbindir}/*
+%exclude %{_sbindir}/sefcontext_compile
+%exclude %{_sbindir}/selinuxenabled
 %{_mandir}/man5/*
 %{_mandir}/man8/*
 %{_mandir}/ru/man5/*
 %{_mandir}/ru/man8/*
+
+%files utils-min
+%defattr(-,root,root,-)
+%{_sbindir}/sefcontext_compile
+%{_sbindir}/selinuxenabled
 
 %files devel
 %defattr(-,root,root,-)
@@ -106,6 +123,9 @@ echo "d %{_localstatedir}/run/setrans 0755 root root" > %{buildroot}/%{_libdir}/
 %{python3_sitelib}/*
 
 %changelog
+* Tue Mar 08 2022 Chris PeBenito <chpebeni@microsoft.com> - 3.2-2
+- Split sefcontext_compile and selinuxenabled into a subpackage.
+
 * Fri Aug 13 2021 Thomas Crain <thcrain@microsoft.com> - 3.2-1
 - Upgrade to latest upstream version
 - Add -fno-semantic-interposition to CFLAGS as recommended by upstream 
