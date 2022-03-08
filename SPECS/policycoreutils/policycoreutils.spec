@@ -9,7 +9,7 @@
 Summary:        SELinux policy core utilities
 Name:           policycoreutils
 Version:        3.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv2
 Vendor:         Microsoft Corporation
 Distribution:   Mariner
@@ -39,8 +39,9 @@ Requires:       coreutils
 Requires:       diffutils
 Requires:       gawk
 Requires:       grep
-Requires:       libselinux-utils >= %{libselinuxver}
+Requires:       libselinux-utils-min >= %{libselinuxver}
 Requires:       libsepol >= %{libsepolver}
+Requires:       %{name}-min = %{version}-%{release}
 Requires:       rpm
 Requires:       sed
 Requires:       util-linux
@@ -164,6 +165,13 @@ BuildRequires:  systemd
 %description restorecond
 The policycoreutils-restorecond package contains the restorecond service.
 
+%package min
+Summary:        Minimum required SELinux utilities
+Requires:       libselinux-utils-min >= %{libselinuxver}
+
+%description min
+The mininmum policycoreutils tools for running a SELinux system.
+
 %files python-utils
 %license python/COPYING
 %{_sbindir}/semanage
@@ -274,22 +282,13 @@ The policycoreutils-restorecond package contains the restorecond service.
 %{_mandir}/ru/man8/sepolicy-transition.8*
 %{_mandir}/ru/man8/sepolicy.8*
 
-%files
-%license policycoreutils/COPYING
+%files min
 %{_sbindir}/restorecon
-%{_sbindir}/restorecon_xattr
-%{_sbindir}/fixfiles
 %{_sbindir}/setfiles
 %{_sbindir}/load_policy
-%{_sbindir}/genhomedircon
 %{_sbindir}/setsebool
 %{_sbindir}/semodule
 %{_sbindir}/sestatus
-%{_bindir}/secon
-%{_bindir}/semodule_expand
-%{_bindir}/semodule_link
-%{_bindir}/semodule_package
-%{_bindir}/semodule_unpackage
 %{_bindir}/sestatus
 %{_libexecdir}/selinux/hll
 %{_libexecdir}/selinux/selinux-autorelabel
@@ -298,6 +297,17 @@ The policycoreutils-restorecond package contains the restorecond service.
 %{_unitdir}/selinux-autorelabel.target
 %{generatorsdir}/selinux-autorelabel-generator.sh
 %config(noreplace) %{_sysconfdir}/sestatus.conf
+
+%files
+%license policycoreutils/COPYING
+%{_sbindir}/restorecon_xattr
+%{_sbindir}/fixfiles
+%{_sbindir}/genhomedircon
+%{_bindir}/secon
+%{_bindir}/semodule_expand
+%{_bindir}/semodule_link
+%{_bindir}/semodule_package
+%{_bindir}/semodule_unpackage
 %{_mandir}/man5/selinux_config.5.gz
 %{_mandir}/ru/man5/selinux_config.5.gz
 %{_mandir}/man5/sestatus.conf.5.gz
@@ -351,6 +361,9 @@ The policycoreutils-restorecond package contains the restorecond service.
 %systemd_postun_with_restart restorecond.service
 
 %changelog
+* Tue Mar 08 2022 Chris PeBenito <chpebeni@microsoft.com> - 3.2-1
+- Split minimum required policy management tools into a subpackage.
+
 * Fri Aug 13 2021 Thomas Crain <thcrain@microsoft.com> - 3.2-1
 - Upgrade to latest upstream version
 - Switch source to use upstream's combined tarball
