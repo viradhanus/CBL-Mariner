@@ -9,7 +9,7 @@
 Summary:        SELinux policy
 Name:           selinux-policy
 Version:        %{refpolicy_major}.%{refpolicy_minor}
-Release:        3%{?dist}
+Release:        2%{?dist}
 License:        GPLv2
 Vendor:         Microsoft Corporation
 Distribution:   Mariner
@@ -302,11 +302,9 @@ exit 0
 selinuxenabled && semodule -nB
 exit 0
 %changelog
-* Tue Mar 08 2022 Chris PeBenito <chpebeni@microsoft.com> - 2.20220106-3
+* Tue Mar 08 2022 Chris PeBenito <chpebeni@microsoft.com> - 2.20220106-2
 - Split policy modules to a subpackage. Keep core images supported by
   base module.
-
-* Tue Feb 01 2022 Chris PeBenito <chpebeni@microsoft.com> - 2.20220106-2
 - Update systemd-homed and systemd-userdbd patch to upstreamed version.
 - Backport containers policy.
 
