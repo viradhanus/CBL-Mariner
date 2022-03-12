@@ -1,7 +1,7 @@
 Summary:        Kernel Audit Tool
 Name:           audit
 Version:        3.0.6
-Release:        3%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 Vendor:         Microsoft Corporation
 Distribution:   Mariner
@@ -10,9 +10,12 @@ URL:            https://people.redhat.com/sgrubb/audit/
 Source0:        https://people.redhat.com/sgrubb/audit/%{name}-%{version}.tar.gz
 Patch0:         refuse-manual-stop.patch
 BuildRequires:  e2fsprogs-devel
+BuildRequires:  golang
 BuildRequires:  krb5-devel
+BuildRequires:  libcap-ng-devel
+BuildRequires:  openldap
 BuildRequires:  swig
-BuildRequires:  systemd-bootstrap
+BuildRequires:  systemd
 Requires:       %{name}-libs = %{version}-%{release}
 Requires:       gawk
 Requires:       krb5
@@ -68,8 +71,10 @@ and libauparse.
     --sysconfdir=%{_sysconfdir} \
     --with-python3=yes \
     --enable-gssapi-krb5=yes \
+    --with-libcap-ng=yes \
     --with-aarch64 \
-    --disable-zos-remote \
+    --enable-zos-remote \
+    --with-golang \
     --enable-systemd \
     --disable-static
 
@@ -119,6 +124,8 @@ find %{buildroot} -type f -name "*.la" -delete -print
 %ghost %config(noreplace) %attr(640,root,root) %{_sysconfdir}/audit/audit-stop.rules
 %config(noreplace) %attr(640,root,root) %{_sysconfdir}/audit/plugins.d/af_unix.conf
 %config(noreplace) %attr(640,root,root) %{_sysconfdir}/audit/plugins.d/syslog.conf
+%config(noreplace) %attr(640,root,root) %{_sysconfdir}/audit/plugins.d/audispd-zos-remote.conf
+%config(noreplace) %attr(640,root,root) %{_sysconfdir}/audit/zos-remote.conf
 %config(noreplace) %attr(640,root,root) %{_sysconfdir}/audit/audisp-remote.conf
 %config(noreplace) %attr(640,root,root) %{_sysconfdir}/audit/plugins.d/au-remote.conf
 %config(noreplace) %attr(640,root,root) %{_sysconfdir}/libaudit.conf
@@ -132,6 +139,7 @@ find %{buildroot} -type f -name "*.la" -delete -print
 %defattr(-,root,root)
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*.pc
+%{_libdir}/golang/*
 %{_includedir}/*.h
 %{_mandir}/man3/*
 %{_datadir}/aclocal/audit.m4
@@ -141,10 +149,7 @@ find %{buildroot} -type f -name "*.la" -delete -print
 %{python3_sitelib}/*
 
 %changelog
-* Fri Mar 04 2022 Andrew Phelps <anphel@microsoft.com> - 3.0.6-3
-- Reduce build requirements to build in toolchain environment
-
-* Mon Jan 31 2022 Chris PeBenito <chpebeni@microsoft.com> - 3.0.6-2
+* Mon Jan 31 2022 Chris PeBenito <chpebeni@microsoft.com> - 3.0.6.2
 - Remove override so auditd starts by default.
 
 * Fri Dec 10 2021 Chris Co <chrco@microsoft.com> - 3.0.6-1

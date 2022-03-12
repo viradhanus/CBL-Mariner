@@ -1,7 +1,7 @@
 Summary:        Utilities for file systems, consoles, partitions, and messages
 Name:           util-linux
 Version:        2.37.2
-Release:        3%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 Vendor:         Microsoft Corporation
 Distribution:   Mariner
@@ -9,7 +9,6 @@ Group:          Applications/System
 URL:            https://git.kernel.org/pub/scm/utils/util-linux/util-linux.git/about/
 Source0:        https://mirrors.edge.kernel.org/pub/linux/utils/%{name}/v2.37/%{name}-%{version}.tar.xz
 
-BuildRequires:  audit-devel
 BuildRequires:  libselinux-devel
 BuildRequires:  ncurses-devel
 %if %{with_check}
@@ -17,7 +16,6 @@ BuildRequires:  ncurses-term
 %endif
 
 Requires:       %{name}-devel = %{version}-%{release}
-Requires:       audit-libs
 
 Conflicts:      toybox
 
@@ -68,8 +66,7 @@ autoreconf -fi
     --disable-static \
     --disable-use-tty-group \
     --without-python \
-    --with-selinux \
-    --with-audit
+    --with-selinux
 make %{?_smp_mflags}
 
 %install
@@ -126,9 +123,6 @@ rm -rf %{buildroot}/lib/systemd/system
 %{_mandir}/man3/*
 
 %changelog
-* Fri Mar 04 2022 Andrew Phelps <anphel@microsoft.com> - 2.37.2-3
-- Build with audit support
-
 * Fri Feb 04 2022 Pawel Winogrodzki <pawelwi@microsoft.com> - 2.37.2-2
 - Removing epoch
 
