@@ -11,7 +11,7 @@ Source0:     http://releases.pagure.org/xmlto/%{name}-%{version}.tar.gz
 BuildRequires:    docbook-style-xsl
 BuildRequires:    docbook-dtd-xml
 BuildRequires:    libxslt-devel
-Requires:         systemd
+Recommends:         systemd
 Requires:	  docbook-style-xsl
 Requires:	  libxslt
 
