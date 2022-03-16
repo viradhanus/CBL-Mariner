@@ -14,7 +14,10 @@ BuildRequires:  gcc
 BuildRequires:  gtk-doc
 BuildRequires:  libffi-devel
 BuildRequires:  libtasn1-devel >= 2.3
-BuildRequires:  systemd-bootstrap-devel
+# Note: p11-kit builds normally in the toolchain, where systemd-bootstrap is available (and BuildRequires are ignored)
+# To avoid cyclic dependencies, require systemd package for regular rpm build of this package.
+#BuildRequires:  systemd-bootstrap-devel
+BuildRequires:  systemd
 
 %description
 p11-kit provides a way to load and enumerate PKCS#11 modules, as well

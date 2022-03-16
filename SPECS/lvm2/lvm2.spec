@@ -21,7 +21,8 @@ BuildRequires:  python3-devel
 BuildRequires:  python3-pyudev
 BuildRequires:  python3-setuptools
 BuildRequires:  readline-devel
-BuildRequires:  systemd-bootstrap-devel
+#BuildRequires:  systemd-bootstrap-devel
+BuildRequires:  systemd-bootstrap
 Requires:       device-mapper = %{version}-%{release}
 Requires:       device-mapper-event = %{version}-%{release}
 Requires:       device-mapper-event-libs = %{version}-%{release}

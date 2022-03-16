@@ -10,7 +10,9 @@ Group:          Applications/File
 URL:            https://www.freedesktop.org/wiki/Software/dbus
 Source0:        https://%{name}.freedesktop.org/releases/%{name}/%{name}-%{version}.tar.xz
 BuildRequires:  expat-devel
-BuildRequires:  systemd-bootstrap-devel
+#BuildRequires:  systemd-bootstrap-devel
+BuildRequires:  systemd-bootstrap
+
 BuildRequires:  xz-devel
 BuildRequires:  libselinux-devel
 Requires:       expat
