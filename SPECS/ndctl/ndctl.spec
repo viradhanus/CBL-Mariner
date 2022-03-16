@@ -26,7 +26,7 @@ BuildRequires:	pkgconfig(libudev)
 BuildRequires:	pkgconfig(uuid)
 BuildRequires:	pkgconfig(json-c)
 BuildRequires:	pkgconfig(bash-completion)
-BuildRequires:	pkgconfig(systemd)
+BuildRequires:	systemd
 BuildRequires:	keyutils-libs-devel
 
 %description
