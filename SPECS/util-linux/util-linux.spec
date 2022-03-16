@@ -18,6 +18,7 @@ BuildRequires:  ncurses-term
 
 Requires:       %{name}-devel = %{version}-%{release}
 Requires:       audit-libs
+Requires:       gtk-doc
 
 Conflicts:      toybox
 
