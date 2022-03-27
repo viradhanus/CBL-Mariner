@@ -2,9 +2,10 @@
 # RubyGems should be share by all Ruby implementations.
 %global rubygems_dir %{_datadir}/rubygems
 %global ruby_libdir %{_datadir}/%{name}
+%global rubygems_version %{version}-%{release}
 %global bigdecimal_version 3.1.1
 %global io_console_version 0.5.6
-%global psych_version      3.1.0
+%global psych_version      %{version}-%{release}
 %global irb_version        1.2.6
 %global json_version       2.3.0
 %global minitest_version   5.13.0
