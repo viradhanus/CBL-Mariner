@@ -11,13 +11,13 @@ import (
 	"path"
 	"path/filepath"
 
-	"github.com/microsoft/CBL-Mariner/toolkit/tools/imagegen/configuration"
+	"gopkg.in/alecthomas/kingpin.v2"
+
 	"github.com/microsoft/CBL-Mariner/toolkit/tools/internal/exe"
 	"github.com/microsoft/CBL-Mariner/toolkit/tools/internal/file"
 	"github.com/microsoft/CBL-Mariner/toolkit/tools/internal/logger"
+	"github.com/microsoft/CBL-Mariner/toolkit/tools/pkg/imagegen/configuration"
 	"github.com/microsoft/CBL-Mariner/toolkit/tools/roast/formats"
-
-	"gopkg.in/alecthomas/kingpin.v2"
 )
 
 const defaultWorkerCount = "10"
