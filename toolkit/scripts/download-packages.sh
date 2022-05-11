@@ -81,12 +81,17 @@ for directory in $directories; do
         # If these are not srpms, there is additional directory to skip
         appendix=
         if [[ ! "$package_type" == "srpms" ]]; then
-            echo "-- Downloading RPMS - adding additional directory."
-            #appendix="/rpms"
+            if [[ "$repository_url" == *"1.0"* ]]; then
+                echo "-- Downloading 1.0 RPMS - adding additional directory."
+            fi
         fi
-
         # Appendix contains the slash, if needed.
         get_packages "$repository_url"/"$directory"/"$package_type""$appendix"
+
+        # Also get debuginfo for 2.0
+        if [[ "$repository_url" == *"2.0"* ]]; then
+            get_packages "$repository_url"/"$directory"/"debuginfo"/"$package_type""$appendix"
+        fi
     done
 done
 
