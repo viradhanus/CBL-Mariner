@@ -2,7 +2,7 @@
 Summary:        A code coverage report generator using GNU gcov
 Name:           gcovr
 Version:        5.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        BSD
 Vendor:         Microsoft Corporation
 Distribution:   Mariner
@@ -95,6 +95,9 @@ popd
 
 
 %changelog
+* Tue May 10 2022 Andrew Phelps <anphel@microsoft.com> - 5.0-2
+- Use python3dist instead of py3_dist macro
+
 * Wed Feb 02 2022 Cameron Baird <cameronbaird@microsoft.com> - 5.0-1
 - Update to v5.0
 
