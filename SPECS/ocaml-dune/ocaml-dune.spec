@@ -23,8 +23,8 @@ Distribution:   Mariner
 URL:            https://dune.build
 Source0:        https://github.com/ocaml/%{libname}/archive/%{version}/%{libname}-%{version}.tar.gz
 
-BuildRequires:  %{py3_dist sphinx-rtd-theme}
-BuildRequires:  %{py3_dist sphinx}
+BuildRequires:  python3dist(sphinx-rtd-theme)
+BuildRequires:  python3dist(sphinx)
 BuildRequires:  make
 BuildRequires:  ocaml >= 4.08
 BuildRequires:  ocaml-csexp-devel >= 1.3.0

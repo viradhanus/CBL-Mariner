@@ -11,17 +11,17 @@ Source0:        https://github.com/gcovr/%{name}/archive/%{version}/%{name}-%{ve
 BuildRequires:  make
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
-Requires:       %{py3_dist Jinja2}
+Requires:       python3dist(jinja2)
 # for gcov
 Requires:       gcc
 BuildArch:      noarch
 %{?python_enable_dependency_generator}
 %if %{with docs}
-BuildRequires:  %{py3_dist Jinja2}
-BuildRequires:  %{py3_dist Sphinx}
-BuildRequires:  %{py3_dist lxml}
-BuildRequires:  %{py3_dist sphinx_rtd_theme}
-BuildRequires:  %{py3_dist sphinxcontrib-autoprogram} >= 0.1.5
+BuildRequires:  python3dist(jinja2)
+BuildRequires:  python3dist(sphinx)
+BuildRequires:  python3dist(lxml)
+BuildRequires:  python3dist(sphinx_rtd_theme)
+BuildRequires:  python3dist(sphinxcontrib-autoprogram) >= 0.1.5
 %endif
 
 %description
