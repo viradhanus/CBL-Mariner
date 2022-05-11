@@ -82,7 +82,7 @@ for directory in $directories; do
         appendix=
         if [[ ! "$package_type" == "srpms" ]]; then
             echo "-- Downloading RPMS - adding additional directory."
-            appendix="/rpms"
+            #appendix="/rpms"
         fi
 
         # Appendix contains the slash, if needed.
