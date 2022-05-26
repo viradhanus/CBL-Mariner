@@ -208,7 +208,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{version}-%{release}
 Summary:        QEMU is a FAST! processor emulator
 Name:           qemu
 Version:        6.1.0
-Release:        14%{?dist}
+Release:        15%{?dist}
 License:        BSD AND CC-BY AND GPLv2+ AND LGPLv2+ AND MIT
 Vendor:         Microsoft Corporation
 Distribution:   Mariner
@@ -2221,6 +2221,9 @@ useradd -r -u 107 -g qemu -G kvm -d / -s %{_sbindir}/nologin \
 
 
 %changelog
+* Thu May 26 2022 Andrew Phelps <anphel@microsoft.com> - 6.1.0-15
+- Bump release for test build
+
 * Mon Jan 03 2022 Pawel Winogrodzki <pawelwi@microsoft.com> - 6.1.0-14
 - Disabling 'qemu-system-x86*' subpackages build for non-AMD64 architectures.
 - Disabling dependency on 'ipxe' for non-AMD64 architectures.
