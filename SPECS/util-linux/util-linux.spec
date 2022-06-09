@@ -1,7 +1,7 @@
 Summary:        Utilities for file systems, consoles, partitions, and messages
 Name:           util-linux
 Version:        2.37.2
-Release:        5%{?dist}
+Release:        6%{?dist}
 License:        GPLv2+
 Vendor:         Microsoft Corporation
 Distribution:   Mariner
@@ -11,6 +11,7 @@ Source0:        https://mirrors.edge.kernel.org/pub/linux/utils/%{name}/v2.37/%{
 Source1:        runuser
 Source2:        runuser-l
 BuildRequires:  audit-devel
+BuildRequires:  libcap-ng-devel
 BuildRequires:  libselinux-devel
 BuildRequires:  ncurses-devel
 BuildRequires:  pam-devel
@@ -142,6 +143,9 @@ rm -rf %{buildroot}/lib/systemd/system
 %{_mandir}/man3/*
 
 %changelog
+* Thu Jun 02 2022 Rachel Menge <rachelmenge@microsoft.com> - 2.36.2-6
+- Add Buildrequires libcap-ng-devel to build setpriv
+
 * Tue May 03 2022 Sriram Nambakam <snambakam@microsoft.com> - 2.36.2-5
 - Split libraries into the util-linux-libs package
 
