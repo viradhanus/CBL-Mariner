@@ -511,6 +511,7 @@ python3-debuginfo-3.9.12-1.cm2.aarch64.rpm
 python3-devel-3.9.12-1.cm2.aarch64.rpm
 python3-gpg-1.16.0-1.cm2.aarch64.rpm
 python3-jinja2-3.0.3-2.cm2.noarch.rpm
+python3-libcap-ng-0.8.2-1.cm2.aarch64.rpm
 python3-libs-3.9.12-1.cm2.aarch64.rpm
 python3-libxml2-2.9.14-1.cm2.aarch64.rpm
 python3-lxml-4.8.0-1.cm2.aarch64.rpm
