@@ -8,6 +8,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/microsoft/CBL-Mariner/toolkit/tools/internal/exe"
 	"github.com/microsoft/CBL-Mariner/toolkit/tools/internal/logger"
@@ -116,6 +117,7 @@ func resolveGraphNodes(dependencyGraph *pkggraph.PkgGraph, inputSummaryFile, out
 		}
 	}
 
+	fetchStartTime := time.Now()
 	cachingSucceeded := true
 	if strings.TrimSpace(inputSummaryFile) == "" {
 		// Cache an RPM for each unresolved node in the graph.
@@ -136,6 +138,15 @@ func resolveGraphNodes(dependencyGraph *pkggraph.PkgGraph, inputSummaryFile, out
 					}
 					logger.Log.Debugf(errorMessage.String())
 				}
+			} else {
+				resolveErr := resolveSingleNode(cloner, n, toolchainPackages, fetchedPackages, prebuiltPackages, *outDir)
+				if resolveErr != nil {
+					logger.Log.Warnf("resolveSingleNode() FAILED. Do not modify: '%s'", n.FriendlyName())
+				} else {
+					logger.Log.Warnf("resolveSingleNode() PASS. Remove build node for '%s'", n.FriendlyName())
+					nodes, _ := dependencyGraph.FindExactPkgNodeFromPkg(n.VersionedPkg)
+					dependencyGraph.RemovePkgNode(nodes.BuildNode)
+				}
 			}
 		}
 	} else {
@@ -143,6 +154,8 @@ func resolveGraphNodes(dependencyGraph *pkggraph.PkgGraph, inputSummaryFile, out
 		err = repoutils.RestoreClonedRepoContents(cloner, inputSummaryFile)
 		cachingSucceeded = err == nil
 	}
+	fetchTimeTotal := time.Since(fetchStartTime)
+	logger.Log.Warnf("TOTAL time fetching packages: %v minutes / %v seconds", fetchTimeTotal.Minutes(), fetchTimeTotal.Seconds())
 	if stopOnFailure && !cachingSucceeded {
 		return fmt.Errorf("failed to cache unresolved nodes")
 	}

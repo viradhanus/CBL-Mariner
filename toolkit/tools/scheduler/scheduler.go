@@ -406,7 +406,9 @@ func updateGraphWithImplicitProvides(res *schedulerutils.BuildResult, pkgGraph *
 
 	didInjectAny, err := schedulerutils.InjectMissingImplicitProvides(res, pkgGraph, useCachedImplicit)
 	if err != nil {
-		logger.Log.Errorf("Failed to add implicit provides for (%s). Error: %s", res.Node.FriendlyName(), err)
+		// non-fatal error for delta build
+		logger.Log.Warnf("WARNING: Failed to add implicit provides for (%s). Error: %s", res.Node.FriendlyName(), err)
+		err = nil
 	} else if didInjectAny {
 		// Failure to optimize the graph is non fatal as there may simply be unresolved dynamic dependencies
 		var subgraphErr error

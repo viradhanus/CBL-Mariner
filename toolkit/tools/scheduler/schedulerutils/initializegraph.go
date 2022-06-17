@@ -21,7 +21,7 @@ const (
 // - It will subgraph the graph to only contain the desired packages if possible.
 func InitializeGraph(inputFile string, packagesToBuild []*pkgjson.PackageVer) (isOptimized bool, pkgGraph *pkggraph.PkgGraph, goalNode *pkggraph.PkgNode, err error) {
 	const (
-		canUseCachedImplicit = false
+		canUseCachedImplicit = true
 		strictGoalNode       = true
 	)
 

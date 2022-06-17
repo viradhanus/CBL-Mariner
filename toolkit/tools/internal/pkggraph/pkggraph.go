@@ -1420,7 +1420,7 @@ func findAllRPMS(rpmsToFind []string) (foundAllRpms bool, missingRpms []string) 
 
 		if !isFile {
 			logger.Log.Debugf("Did not find (%s)", rpm)
-			missingRpms = append(missingRpms, "rpm")
+			missingRpms = append(missingRpms, rpm)
 		}
 	}
 	foundAllRpms = len(missingRpms) == 0
