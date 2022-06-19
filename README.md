@@ -19,7 +19,7 @@ When security vulnerabilities arise, CBL-Mariner supports both a package-based u
 Build
 Instructions for building CBL-Mariner may be found here: Toolkit Documentation.
 
-ISO
+ISO.
 You can try CBL-Mariner with the following ISO Image: 
 - [Mariner 2.0 x86_64 ISO](https://aka.ms/mariner-2.0-x86_64-iso). 
 - [Mariner 1.0 x86_64 ISO](https://aka.ms/mariner-1.0-x86_64-iso).
